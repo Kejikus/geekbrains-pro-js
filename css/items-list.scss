@@ -1,0 +1,102 @@
+
+.teal-button {
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  font-family: sans-serif;
+  transition: background-color 100ms ease-in-out, box-shadow 100ms ease-in-out;
+}
+
+.teal-button:hover {
+  background-color: mix(teal, white, 80);
+  box-shadow: 1px 1px 3px #999;
+}
+
+body {
+  margin: 0;
+}
+
+.main-header {
+  display: grid;
+  grid-template-columns: 1fr 6rem 10rem;
+  grid-template-areas: ". cart-btn profile";
+  gap: 1rem;
+  height: 3rem;
+  background-color: #eee;
+  padding: 0.5rem;
+  position: sticky;
+  font-family: sans-serif;
+}
+
+.main-header_cart-btn {
+  @extend .teal-button;
+  grid-area: cart-btn;
+  text-transform: uppercase;
+}
+
+.main-header_profile {
+  grid-area: profile;
+  text-align: center;
+  line-height: 3rem;
+  font-size: 1.1rem;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.item-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-items: stretch;
+  gap: 1rem;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.shop-item {
+  display: grid;
+  grid-template-rows: max-content min-content min-content;
+  gap: 0.7rem;
+  grid-auto-flow: column;
+  padding: 0.5rem;
+  max-width: 250px;
+
+  background-color: mix(teal, white, 20);
+  border-radius: 3px;
+  box-shadow: 2px 2px 4px lightgrey;
+}
+
+.shop-item_image {
+  display: flex;
+  justify-content: center;
+  img {
+    display: block;
+    width: 100%;
+    min-height: 130px;
+  }
+}
+
+.shop-item_name {
+  font-size: 1.1rem;
+  font-family: sans-serif;
+}
+
+.shop-item_buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  * {
+    display: block;
+  }
+}
+
+.shop-item_add-button {
+  @extend .teal-button;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
