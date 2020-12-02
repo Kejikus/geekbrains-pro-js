@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>eShop</title>
     <link rel="stylesheet" href="./css/items-list.css">
 </head>
 <body>
+<div id="app">
     <header class="main-header">
         <button class="main-header_cart-btn">Корзина</button>
         <div class="main-header_profile">
@@ -14,115 +15,20 @@
     </header>
     <main>
         <div class="item-container">
-            <div class="shop-item">
+            <div class="shop-item" v-for="good in filteredGoods">
                 <div class="shop-item_image">
                     <img src="https://via.placeholder.com/160x120" alt="">
                 </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
-                <div class="shop-item_buttons">
-                    <button class="shop-item_add-button">Добавить</button>
-                </div>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item_image">
-                    <img src="https://via.placeholder.com/160x120" alt="">
-                </div>
-                <div class="shop-item_name">Название товара</div>
+                <div class="shop-item_name">{{ good.name }}</div>
+                <div class="shop-item_price">${{ good.price }}</div>
                 <div class="shop-item_buttons">
                     <button class="shop-item_add-button">Добавить</button>
                 </div>
             </div>
         </div>
     </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

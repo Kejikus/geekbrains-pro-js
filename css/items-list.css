@@ -58,7 +58,7 @@ main {
 
 .shop-item {
   display: grid;
-  grid-template-rows: max-content min-content min-content;
+  grid-template-rows: max-content min-content min-content min-content;
   gap: 0.7rem;
   grid-auto-flow: column;
   padding: 0.5rem;
@@ -81,6 +81,12 @@ main {
 .shop-item_name {
   font-size: 1.1rem;
   font-family: sans-serif;
+}
+
+.shop-item_price {
+  font-weight: bold;
+  font-family: sans-serif;
+  text-align: right;
 }
 
 .shop-item_buttons {
