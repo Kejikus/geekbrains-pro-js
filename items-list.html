@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eShop</title>
+    <link rel="stylesheet" href="./css/items-list.css">
+</head>
+<body>
+<div id="app">
+    <header class="main-header">
+        <div class="main-header__search-line">
+            <input type="search" v-model="searchLine">
+            <input type="submit" value="Искать" @click="filterGoods(searchLine)">
+        </div>
+        <div class="cart main-header__cart">
+            <button class="cart__cart-btn" @click="showHideCart">Корзина</button>
+            <div class="cart__dropdown" v-if="isVisibleCart">
+                <ul class="cart__items-list">
+                    <li class="cart-item" v-for="entry in cart.entries">
+                        <div class="cart-item__name">{{ entry.item.name }}</div>
+                        <div class="cart-item__count">{{ entry.quantity }}</div>
+                        <div class="cart-item__total-price">${{ entry.item.price * entry.quantity }}</div>
+                    </li>
+                </ul>
+                <button class="cart__clear-btn">Очистить</button>
+            </div>
+        </div>
+        <div class="main-header__profile">
+            <a href="#">Sign up</a> or <a href="#">Log in</a>
+        </div>
+    </header>
+    <main>
+        <div class="item-container">
+            <div class="shop-item" v-for="good in filteredGoods">
+                <div class="shop-item__image">
+                    <img src="https://via.placeholder.com/160x120" alt="">
+                </div>
+                <div class="shop-item__name">{{ good.name }}</div>
+                <div class="shop-item__price">${{ good.price }}</div>
+                <div class="shop-item__buttons">
+                    <button class="shop-item__add-button">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
