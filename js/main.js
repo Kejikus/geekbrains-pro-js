@@ -136,32 +136,6 @@ class Item {
     get name() {return this._name;}
 }
 
-class ItemList {
-    /**
-     * @param {Item[]} items
-     */
-    constructor(items = []) {
-        this._items = items;
-    }
-
-    get items() {return this._items;}
-    set items(value) {this._items = value;}
-
-    fetchItemList() {
-        makeGETRequest(`${API_URL}/catalogData.json`)
-            .then((response) => {
-                if (typeof response === "string") {
-                    let res = JSON.parse(response);
-                    if (Array.isArray(res)) {
-                        for (let i = 0; i < res.length; i++) {
-                            this._items.push(new Item(res[i].price, res[i].product_name));
-                        }
-                    }
-                }
-            });
-    }
-}
-
 function makeGETRequest(url) {
     let xhr;
 
@@ -207,14 +181,87 @@ function makeItems(goods) {
     return itemList;
 }
 
+
+Vue.component('item-list', {
+    props: {
+        items: Array
+    },
+    template: `
+        <div class="item-container">
+            <shop-item v-for="item in items" :item="item"></shop-item>
+        </div>
+    `
+});
+
+Vue.component('shop-item', {
+    props: {
+        item: Item
+    },
+    template: `
+        <div class="shop-item">
+            <div class="shop-item__image">
+                <img src="https://via.placeholder.com/160x120" alt="">
+            </div>
+            <div class="shop-item__name">{{ item.name }}</div>
+            <div class="shop-item__price">\${{ item.price }}</div>
+            <div class="shop-item__buttons">
+                <button class="shop-item__add-button">Добавить</button>
+            </div>
+        </div>
+    `
+});
+
+Vue.component('search-line', {
+    data: () => ({
+        searchLine: ""
+    }),
+    template: `
+        <div>
+            <input type="search" v-model="searchLine">
+            <input type="submit" value="Искать" v-on:click="$emit('search', searchLine)">
+        </div>
+    `
+});
+
+Vue.component('cart', {
+    data: () => ({
+        isVisible: false,
+        cart: new Cart(),
+    }),
+    methods: {
+        showHideCart() {
+            this.isVisible = !this.isVisible;
+        }
+    },
+    computed: {
+        isCartEmpty() {
+            return this.cart.entries.length === 0;
+        }
+    },
+    template: `
+        <div class="cart">
+            <button class="cart__cart-btn" @click="showHideCart">Корзина</button>
+            <div class="cart__dropdown" v-if="isVisible">
+                <strong v-if="isCartEmpty">Cart is empty</strong>
+                <ul class="cart__items-list" v-if="!isCartEmpty">
+                    <li class="cart-item" v-for="entry in cart.entries">
+                        <div class="cart-item__name">{{ entry.item.name }}</div>
+                        <div class="cart-item__count">{{ entry.quantity }}</div>
+                        <div class="cart-item__total-price">\${{ entry.item.price * entry.quantity }}</div>
+                    </li>
+                </ul>
+                <button class="cart__clear-btn" v-if="!isCartEmpty">Очистить</button>
+            </div>
+        </div>
+    `
+});
+
+
 const app = new Vue({
     el: '#app',
     data: {
-        goods: [],
-        filteredGoods: [],
-        searchLine: '',
-        isVisibleCart: false,
-        cart: new Cart(),
+        items: [],
+        filteredItems: [],
     },
     methods: {
         makeGETRequest(url) {
@@ -231,11 +278,8 @@ const app = new Vue({
     mounted() {
         this.makeGETRequest(`${API_URL}/catalogData.json`)
             .then((goodsTxt) => {
-                this.goods = makeItems(JSON.parse(goodsTxt));
-                this.filteredGoods = this.goods;
-                this.cart.addItem(this.goods[0]);
-                this.cart.addItem(this.goods[0]);
-                this.cart.addItem(this.goods[1]);
+                this.items = makeItems(JSON.parse(goodsTxt));
+                this.filteredItems = this.items;
             });
     }
 });
